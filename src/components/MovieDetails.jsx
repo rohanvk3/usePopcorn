@@ -5,7 +5,7 @@ import StarRating from "./StarRating";
 
 import useKey from "../hooks/useKey";
 
-const KEY = "f5af8375";
+const KEY = process.env.VITE_OMDB_API_KEY;
 
 export default function MovieDetails({
   selectedId,
