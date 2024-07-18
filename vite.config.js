@@ -6,6 +6,6 @@ import dotenv from "dotenv";
 export default defineConfig({
   plugins: [react()],
   define: {
-    "process.env": JSON.stringify(dotenv.config().parsed),
+    "process.env": process.env,
   },
 });
