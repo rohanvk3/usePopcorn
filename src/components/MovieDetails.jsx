@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+const KEY = import.meta.env.VITE_OMDB_API_KEY;
 
 import Loader from "./Loader";
 import StarRating from "./StarRating";
 
 import useKey from "../hooks/useKey";
-
-const KEY = process.env.VITE_OMDB_API_KEY;
 
 export default function MovieDetails({
   selectedId,
@@ -16,6 +15,14 @@ export default function MovieDetails({
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
+
+  const countRef = useRef(0);
+  useEffect(
+    function () {
+      countRef.current++;
+    },
+    [userRating]
+  );
 
   const isWatched = watched
     .map((watchedMovie) => watchedMovie.imdbID)
@@ -47,6 +54,7 @@ export default function MovieDetails({
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
       userRating,
+      userRatingDecision: countRef.current,
     };
     onAddWatched(newWatchedMovie);
     onCloseMovie();

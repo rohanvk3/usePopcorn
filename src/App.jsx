@@ -22,9 +22,9 @@ export const average = (arr) =>
 function App() {
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [watched, setWatched] = useLocalStorage([], "watched");
+  const [watched, setWatched] = useLocalStorage("watched", []);
 
-  const [movies, error, isLoading] = useMovies(query);
+  const { movies, error, isLoading } = useMovies(query);
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
