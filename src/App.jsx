@@ -15,6 +15,7 @@ import WatchedMoviesList from "./components/WatchedMoviesList";
 
 import useMovies from "./hooks/useMovies";
 import useLocalStorage from "./hooks/useLocalStorage";
+import Spinner from "./components/Spinner";
 
 export const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -25,6 +26,8 @@ function App() {
   const [watched, setWatched] = useLocalStorage("watched", []);
 
   const { movies, error, isLoading } = useMovies(query);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -53,8 +56,8 @@ function App() {
       </NavBar>
 
       <Home>
-        <Box>
-          {isLoading && <Loader />}
+        <Box className={selectedId ? "hide-on-mobile" : ""}>
+          {isLoading && <Spinner />}
           {!isLoading && !error && (
             <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
           )}
@@ -72,7 +75,7 @@ function App() {
               onAddWatched={handleAddWatched}
               watched={watched}
             />
-          ) : (
+          ) : isMobile && query !== "" ? null : (
             <>
               <WatchedSummary watched={watched} />
               <WatchedMoviesList

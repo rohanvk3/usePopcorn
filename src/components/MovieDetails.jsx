@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 const KEY = import.meta.env.VITE_OMDB_API_KEY;
 
-import Loader from "./Loader";
 import StarRating from "./StarRating";
 
 import useKey from "../hooks/useKey";
+import Spinner from "./Spinner";
 
 export default function MovieDetails({
   selectedId,
@@ -99,7 +99,7 @@ export default function MovieDetails({
   return (
     <div className="details">
       {isLoading ? (
-        <Loader />
+        <Spinner />
       ) : (
         <>
           <header>
