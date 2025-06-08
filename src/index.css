@@ -414,11 +414,11 @@ body {
   }
 
   .list li {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    row-gap: 1rem;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1rem;
+    text-align: center;
   }
 
   .list img {
@@ -474,8 +474,22 @@ body {
     padding: 2rem 1rem;
   }
 
-  .btn-add,
   .btn-delete {
+    position: static;
+    margin-top: 2rem;
+
+    width: 2.8rem; /* smaller width */
+    height: 2.8rem; /* smaller height */
+    min-height: unset; /* remove min-height */
+    padding: 0; /* remove padding */
+    font-size: 1.2rem; /* smaller font */
+    border-radius: 50%; /* make circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-add {
     min-height: 44px;
     padding: 1rem;
     font-size: 1.6rem;
